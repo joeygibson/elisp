@@ -13,6 +13,7 @@
 
 ;; = is numeric equality
 ;; /= is numeric inequality
+;; (not ...) is for negating anything
 ;; eq is value equality; also works for integers
 ;; eql is float equality; just use =
 ;; equal is for deep, structural equality
@@ -28,6 +29,9 @@
 (string= "foo" "baz") ; nil; just use (equal)
 (substring "foobar" 0 3); foo
 (upcase "foobar") ; FOOBAR
+
+(string-to-number "3")                  ; 3
+(number-to-string 23)                   ; "23"
 
 ;; Conditionals
 
@@ -263,6 +267,39 @@
 
 ;; Variables
 (defconst pi 3.14159 "A gross aproximation of π")
+
+;; Interactive
+(defun yay ()
+  "Insert 'Yay!' at cursor position"
+  (interactive)
+  (insert "Yay!"))
+(yay)                                   ; Yay!
+
+;; accept a universal-argument
+(defun myfunction (arg)
+  "Prints the argument"
+  (interactive "p")
+  (message "Your argument is %d" arg))
+;; call with C-u 23 M-x myfunction => "Your argument is 23"
+
+;; accept a region
+(defun myRegionFunction (myStart myEnd)
+  "Prints region start and end positions"
+  (interactive "r")
+  (message "Region starts at %d and ends at %d." myStart myEnd))
+;; highlight a region and then M-x myRegionFunction
+
+(interactive "nWhat is your age?")      ; prompt for number
+(interactive "n")                       ; prompt for number
+(interactive "sEnter a string")         ; prompt for string
+(interactive "r")                       ; region
+
+
+
+
+
+
+
 
 
 
